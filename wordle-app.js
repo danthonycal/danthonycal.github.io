@@ -24,36 +24,6 @@ if (isSameDateAs(now, new Date(2022,3,22))){
     rightGuessString = WORDS[Math.floor(Math.random() * WORDS.length)];
 }
 console.log(rightGuessString)
-// let x = setInterval(function() {
-    
-//     // Get today's date and time
-//     let now = new Date().getTime();
-    
-//     // Find the distance between now and the count down date
-//     let distance = dDay - now;
-    
-//     // Time calculations for days, hours, minutes and seconds
-//     let days = Math.floor(distance / (1000 * 60 * 60 * 24));
-//     let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-//     let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-//     let seconds = Math.floor((distance % (1000 * 60)) / 1000);
-    
-//     console.log(days.toString() + "d " + hours.toString() + "h " + minutes.toString() + "m " + seconds.toString() + "s ")
-//     let ind=Math.floor(distance/30)
-//     console.log(ind)
-//     console.log(rightGuessString)
-
-//     // Display the result in the element with id="demo"
-//     // document.getElementById("demo").innerHTML = days + "d " + hours + "h "
-//     // + minutes + "m " + seconds + "s ";
-    
-//     // If the count down is finished, write some text
-//     // if (distance < 0) {
-//         //   clearInterval(x);
-//         //   document.getElementById("demo").innerHTML = "EXPIRED";
-//         // }
-//     }, 1000);
-
     
 function initBoard() {
     let board = document.getElementById("game-board");
@@ -214,12 +184,12 @@ const animateCSS = (element, animation, prefix = 'animate__') =>
 });
 
 document.addEventListener("keyup", (e) => {
-
+    let pressedKey = String(e.key)
+    if(!pressedKey.match(/^[a-zA-Z]+$/gi)) {return}
     if (guessesRemaining === 0) {
         return
     }
 
-    let pressedKey = String(e.key)
     if (pressedKey === "Backspace" && nextLetter !== 0) {
         deleteLetter()
         return
@@ -240,18 +210,18 @@ document.addEventListener("keyup", (e) => {
 
 document.getElementById("keyboard-cont").addEventListener("click", (e) => {
     const target = e.target
-    
     if (!target.classList.contains("keyboard-button")) {
         return
     }
     let key = target.textContent
-
+    
     if (key === "←") {
         key = "Backspace"
     }
     if (key === "↵") {
         key = "Enter"
     } 
+    
 
     document.dispatchEvent(new KeyboardEvent("keyup", {'key': key}))
 })
