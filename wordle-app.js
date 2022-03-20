@@ -4,9 +4,7 @@ const NUMBER_OF_GUESSES = 6;
 let guessesRemaining = NUMBER_OF_GUESSES;
 let currentGuess = [];
 let nextLetter = 0;
-// let dDay = new Date("Mar 26, 2022 23:59:99").getTime();
-let dDay = new Date().getTime();
-dDay = new Date(dDay+150000)
+let dDay = new Date("Mar 26, 2022 23:59:99");
 let rightGuessString = ''
 
 let now = new Date()
@@ -228,39 +226,28 @@ document.getElementById("keyboard-cont").addEventListener("click", (e) => {
 
 // Get the modal
 var modal = document.getElementById("myModal");
-var timeModal = document.getElementById("timerModal")
 // Get the button that opens the modal
 var btn = document.getElementById("myBtn");
-var timeBtn = document.getElementById("timeBtn")
 // Get the <span> element that closes the modal
+console.log(document.getElementsByClassName("close"))
 var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks on the button, open the modal
-btn.onclick = function() {
-  modal.style.display = "block";
-}
-timeBtn.onclick = function() {
-  timeModal.style.display = "block";
-}
+btn.addEventListener("click", function() {
+    modal.style.display = "block";
+})
+
 // When the user clicks on <span> (x), close the modal
 span.onclick = function() {
-  modal.style.display = "none";
-}
-span.onclick = function() {
-  timeModal.style.display = "none";
+    modal.style.display = "none";
 }
 
 // When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
-window.onclick = function(event) {
-    if (event.target == timeModal) {
-      timeModal.style.display = "none";
+window.addEventListener("click", function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
     }
-  }
+})
 
 // Set the date we're counting down to
 var countDownDate = new Date("March 26, 2022 23:59:99").getTime();
@@ -281,8 +268,10 @@ var x = setInterval(function() {
   var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
   // Display the result in the element with id="demo"
-  document.getElementById("demo").innerHTML = days + "d " + hours + "h "
-  + minutes + "m " + seconds + "s ";
+  document.getElementById("days").innerHTML = days;
+  document.getElementById("hours").innerHTML = hours;
+  document.getElementById("minutes").innerHTML = minutes;
+  document.getElementById("seconds").innerHTML = seconds;
 
   // If the count down is finished, write some text
   if (distance < 0) {
